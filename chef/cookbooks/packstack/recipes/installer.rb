@@ -13,9 +13,9 @@
 # limitations under the License.
 #
 
-packstack_user = node["packstack"]["user"] || "packstack"
+packstack_user = (node["packstack"]["user"] || "packstack" rescue "packstack")
 
-rel = node["packstack"]["openstack_release"]
+rel = (node["packstack"]["openstack_release"] rescue nil)
 case rel
 when "juno"
   packstack_source = "http://rdo.fedorapeople.org/openstack-juno/rdo-release-juno.rpm"
