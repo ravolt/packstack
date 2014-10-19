@@ -1,0 +1,14 @@
+
+%input#proposal_attributes{:type => "hidden", :name => "proposal_attributes", :value => @proposal.raw_data['attributes'][@proposal.barclamp].to_json}
+%p
+  %label{:for => "proposal_attributes"}= t('.attributes')
+  = link_to t('raw'), proposal_barclamp_path(:id => @proposal.name, :controller => @proposal.barclamp, :dep_raw => @dep_raw, :attr_raw => true), :style => "float: right;"
+  %div.container
+    %p
+      %label{ :for => :fsid }= t('.fsid')
+      %input#fsid{:style => "width:280px;", :type => "text", :name => "fsid", :'data-default' => @proposal.raw_data['attributes'][@proposal.barclamp]["config"]["fsid"], :onchange => "update_value('config/fsid', 'fsid', 'string')"}
+    %p
+      %label{ :for => :monitor_secret }= t('.monitor_secret')
+      %input#monitor_secret{:style => "width:360px;", :type => "text", :name => "monitor_secret", :'data-default' => @proposal.raw_data['attributes'][@proposal.barclamp]["monitor-secret"], :onchange => "update_value('monitor-secret', 'monitor_secret', 'string')"}
+
+

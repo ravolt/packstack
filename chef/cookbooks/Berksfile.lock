@@ -1,0 +1,6 @@
+DEPENDENCIES
+  packstack
+    path: packstack
+
+GRAPH
+  packstack (1.0.0)

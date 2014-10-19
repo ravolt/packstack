@@ -1,0 +1,7 @@
+name             'packstack'
+maintainer       'Greg Althaus'
+maintainer_email 'galthaus@austin.rr.com'
+license          'Apache 2.0'
+description      'Installs a packstack environment'
+long_description 'Installs a packstack environment'
+version          '1.0.0'
