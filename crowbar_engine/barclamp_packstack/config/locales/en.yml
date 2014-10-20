@@ -1,0 +1,12 @@
+# Copyright 2014, Rob Hirschfeld
+# All Rights Reserved
+
+en:
+  barclamp_packstack:
+    node_roles:
+  common:
+    roles:
+      packstack-installer: "Packstack Base"
+      packstack-client: "Packstack Node"
+      packstack-installed-node: "OpenStack (Packstack)"
+    attribs:
