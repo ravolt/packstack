@@ -12,7 +12,7 @@ barclamp:
 roles:
   - name: packstack-installer
     jig: chef
-    description: 'Provides an environment to run packstack.'
+    description: 'Provides a base environment to run packstack.'
     requires:
       - crowbar-installed-node
     flags:
@@ -40,10 +40,18 @@ roles:
           type: str
           required: false
   - name: packstack-client
+    description: 'Nodes for Packstack'
     jig: chef
     requires:
       - packstack-installer
       - crowbar-installed-node
     flags:
       - implicit
+  - name: packstack-installed-node
+    description: 'OpenStack setup via Packstack'
+    jig: noop
+    requires:
+      - packstack-client
+    flags:
+      - milestone
 
