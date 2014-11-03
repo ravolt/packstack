@@ -66,10 +66,112 @@
 
 <p>The Packstack workload for OpenCrowbar sets up an environment that can run
 packstack.</p>
+
+<p>The <em>packstack-installer</em> role can be added to nodes to generate a
+place to run packstack. The <em>packstack-client</em> role can be added to
+nodes to indicate a node that should participate in the packstack
+configured cluster.</p>
+
+<p>The packstack-installer role will generate a user account to run packstack
+from. The user can already exist, e.g. root, or a new one specified. The
+default is <em>packstack</em>. This can be overriden in the node-role for
+this instance. The attribute is <em>packstack-user</em>. The node-role also
+allows for the specification of the openstack release. The default is
+icehouse, but juno can be specified. At the moment, that appears to be
+juno-1. The attribute is <em>packstack-openstack_release</em>.</p>
+
+<p>The packstack-client will add the public key from all
+<em>packstack-installer</em> roles&#39; users. The node will also have the
+network-manager disabled is present.</p>
+
+<p>Once all the roles are applied, log into a <em>packstack-installer</em>
+node and change to the <em>packstack-user</em>. From this account, you can
+run packstack.</p>
+
+<p>Something like this could be used on a 3 node default setup: packstack
+–install-host=192.168.124.81,192.168.124.82,192.168.124.83 –use-epel=y
+–provision-demo=n</p>
+
+<h2 id="label-Steps%3A">Steps:</h2>
+<ol><li>
+<p>boot admin node</p>
+</li><li>
+<p>Once admin node is ready, start 3-5 KVM machines.</p>
+</li><li>
+<p>start 6 VMs: <code>for j in 1 2 3 4 5 6; do tools/kvm-slave &amp;
+done</code></p>
+</li><li>
+<p>Once these are discovered, use the ready-state wizard to set the following</p>
+</li><li>
+<p>OS to centos7</p>
+</li><li>
+<p>Nothing else. Press apply.</p>
+</li><li>
+<p>This takes you to the deploment screen. DO NOT COMMIT</p>
+</li><li>
+<p>Go to the pilot deployment.</p>
+</li><li>
+<p>Add roles, OpenStack (PackStack)</p>
+</li><li>
+<p>Add Packstack to your controller node - it will add packstack-installer
+&amp; client</p>
+</li><li>
+<p>Edit the packstack-installer to choose your OpenStack release</p>
+</li><li>
+<p>Add Packstack the result of your nodes - it will only add packstack-client</p>
+</li><li>
+<p>Commit deployment</p>
+</li></ol>
+
+<p>Wait while everything happens - all node roles will be green at end.</p>
+<ol><li>
+<p>Once done, get on the packstack-installer node.</p>
+</li><li>
+<p>on admin,</p>
+<ol><li>
+<p><code>sudo ip a add 192.168.124.2/24 dev docker0</code></p>
+</li><li>
+<p><code>su - crowbar</code></p>
+</li><li>
+<p><code>ssh root@192.168.124.81</code> (or which ever machine you choose for
+the packstack installer)</p>
+</li></ol>
+</li><li>
+<p>on packstack installer node</p>
+<ol><li>
+<p><code>su - packstack</code></p>
+</li><li>
+<p><code>packstack --install-host=192.168.124.81,192.168.124.82,192.168.124.83
+--use-epel=y --provision-demo=n</code></p>
+</li><li>
+<p>That command is for three nodes. It will install icehouse nova with
+192.168.124.81 as the controller node.</p>
+</li></ol>
+</li></ol>
+
+<p>Wait for puppet installs to complete</p>
+<ol><li>
+<p>Attach your desktop to the docker bridge: <code>sudo ip a add
+192.168.124.2/24 dev docker0</code></p>
+</li><li>
+<p>Get the credentials for your installation</p>
+</li><li>
+<p><code>exit</code> from the packstack user (you should now be root on the
+compute node)</p>
+</li><li>
+<p>cat /home/packstack/admin_keystonerc</p>
+</li><li>
+<p>go to <a href="http://192.168.124.81">compute node</a> in web browser</p>
+</li><li>
+<p>login using admin/credentials</p>
+</li></ol>
+
+<p>When you are done, <code>for j in 1 2 3 4 5 6; do kill %$j ; done</code> to
+remove the VMs</p>
 </div></div>
 
     <div id="footer">
-  Generated on Thu Oct 16 19:03:21 2014 by
+  Generated on Mon Nov  3 15:05:58 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.4 (ruby-2.1.2).
 </div>

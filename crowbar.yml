@@ -32,8 +32,10 @@ roles:
           type: str
           required: false
           enum:
+            - havana
             - icehouse
             - juno
+            - trunk
       - name: packstack-user
         description: "The user to enable packstack execution"
         map: 'packstack/user'
