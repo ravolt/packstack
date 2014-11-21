@@ -6,10 +6,14 @@ The RPM can be found here: [RPM](http://opencrowbar.s3-website-us-east-1.amazona
 
 # Install
 
-Read this whole paragraph, please.  
-1. Follow the regular OpenCrowbar installation instructions at [here](https://github.com/opencrowbar/core/blob/master/doc/deployment-guide/Install-CentOS-RHEL-6.5-AdminNode.md).  But do not run the production.sh script (The last step).
+Read this whole paragraph, please. 
+
+1. Follow the regular OpenCrowbar installation instructions at [here](https://github.com/opencrowbar/core/blob/master/doc/deployment-guide/Install-CentOS-RHEL-6.5-AdminNode.md).  But do not run the production.sh script (The last step)
+
 2. wget http://opencrowbar.s3-website-us-east-1.amazonaws.com/rackn-packstack-2.0.0.6-1.noarch.rpm
+
 3. yum install -y rackn-packstack-2.0.0.6-1.noarch.rpm
+
 4. NOW you can run production.sh.  /opt/opencrowbar/core/production.sh &lt;FQDN of the admin node&gt;
 
 # Use
