@@ -29,4 +29,8 @@ Something like this could be used on a 3 node default setup:
 packstack --install-host=192.168.124.81,192.168.124.82,192.168.124.83
 --use-epel=y --provision-demo=n
 
+> Additional optons: `--novanetwork-pubif ens4 --novanetwork-privif ens3`
+
+Full list of options: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux_OpenStack_Platform/2/html/Getting_Started_Guide/ch06s03s02.html
+
 
