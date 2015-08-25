@@ -17,10 +17,14 @@ packstack_user = (node["packstack"]["user"] || "packstack" rescue "packstack")
 
 rel = (node["packstack"]["openstack_release"] rescue nil)
 case rel
-when "juno"
-  packstack_source = "http://rdo.fedorapeople.org/openstack-juno/rdo-release-juno.rpm"
-when "icehouse"
+when "trunk"
   packstack_source = "http://rdo.fedorapeople.org/rdo-release.rpm"
+when "juno"
+  packstack_source = "https://repos.fedorapeople.org/repos/openstack/openstack-juno/rdo-release-juno-1.noarch.rpm"
+when "icehouse"
+  packstack_source = "https://repos.fedorapeople.org/repos/openstack/openstack-icehouse/rdo-release-icehouse-4.noarch.rpm"
+when "havana"
+  packstack_source = "https://repos.fedorapeople.org/repos/openstack/openstack-havana/rdo-release-havana-9.noarch.rpm"
 else
   packstack_source = "http://rdo.fedorapeople.org/rdo-release.rpm"
 end
